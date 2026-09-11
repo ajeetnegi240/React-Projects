@@ -23,8 +23,8 @@ export default function MediaCard({anime}){
             bg-gradient-to-r from-slate-950 via-slate-600/40 to-transparent
             drop-shadow-[0_2px_6px_rgba(0,0,0,0.8)]">
                 <h1 className=" w-[80%] line-clamp-4 text-sm text-orange-100">{eachAnime.title_english}</h1>
-                <div className=" flex gap-4 my-4 ">
-                    <p className="text-yellow-500 text-sm">Rating: {eachAnime.score}</p>
+                <div className=" flex gap-4 my-4 max-[410px]:my-1">
+                    <p className="text-yellow-500 text-sm ">Rating: {eachAnime.score}</p>
                 </div>
 
             </div>

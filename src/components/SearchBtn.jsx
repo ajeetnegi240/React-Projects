@@ -85,7 +85,7 @@ function SearchBtn({size=5,height="",width="",opacity=100,}) {
                                 {SearchIcon()}             
                                 <input type="search" 
                                 placeholder="Search"
-                                size='30'
+                                size='20'
                                 className="bg-transparent focus:outline-hidden 
                                 text-white transition ease-out duration-200 hover:scale-110"
                                 onChange={(e)=>setQuery(e.target.value)}

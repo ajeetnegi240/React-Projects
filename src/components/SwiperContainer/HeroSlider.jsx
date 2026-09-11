@@ -21,7 +21,7 @@ export default function HeroSlider(
 
 
     return (
-        <div className=" justify-center bg-transparent w-8/10 h-[35vw]  ">
+        <div className=" justify-center bg-transparent w-9/10 h-[55vw] sm:h-[45vw] ">
             <div className="flex bg-transparent justify-center">
                 <h1 className='text-white m-2
                 drop-shadow-[0_2px_6px_rgba(0,0,0,0.8)]

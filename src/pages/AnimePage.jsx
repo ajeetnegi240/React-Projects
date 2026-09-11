@@ -39,6 +39,15 @@ function ShowAnime(){
         GetData();
             
     },[id])
+    const gototrailer = ()=>{
+        console.log(CurrentAnime)
+        if (CurrentAnime.trailer.url){
+            window.open(CurrentAnime.trailer.url,"_blank","noopener,noreferrer");
+            
+        }else{
+            alert("No trailer available!")
+        }
+    }
 
     return(
         <>
@@ -76,7 +85,10 @@ function ShowAnime(){
                                     <p className="text-yellow-500">Popularity: {CurrentAnime.popularity}</p>
                                     <div className=" flex gap-4 my-4 ">
                                         <p className="text-yellow-500">Rating: {CurrentAnime.score}</p>
-                                        <button className="bg-transparent  border-2 border-orange rounded-lg px-1 hover:bg-orange-500">Trailer</button>
+                                        <button className="bg-transparent  border-2 border-orange rounded-lg px-1 hover:bg-orange-500" onClick={gototrailer}
+                                        >
+                                            Trailer
+                                        </button>
                                     </div>
 
                                 </div>
@@ -96,7 +108,7 @@ function ShowAnime(){
                             {Characters &&
                                 (<div className=" justify-center items-center p-8">
                                     <h1 className="text-2xl text-oliver-400 p-3">Characters </h1>
-                                    <div className="grid grid-cols-4 gap-3">
+                                    <div className="grid sm:grid-cols-4 grid-cols-2 gap-3">
                                         {Characters.map((item,index)=>
                                             <div key={index} className={`flex items-end w-[100%] h-[100%] aspect-9/16 rounded-sm `}
                                                 style={{
