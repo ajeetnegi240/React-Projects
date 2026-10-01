@@ -64,9 +64,14 @@ function ShowAnime(){
                 <div className="flex justify-center items-center p-4 ">
                     {CurrentAnime && 
                         (<div> 
-                            <div  className={`flex items-end w-[100%] h-[100%] rounded-sm  `}
+                            <div  className={`flex items-end w-[100%] h-[100%] 
+                                            max-[640px]:bg-[image:var(--backgroundImageLarge)] max-[640px]:bg-center
+                                            min-[640px]:bg-[image:var(--backgroundImageLarge)] 
+                                            min[640px]:bg-no-repeat min-[640px]:cover
+                                            rounded-sm  `}
                                 style={{
-                                backgroundImage: `url(${CurrentAnime.images.jpg.large_image_url})`,
+                                "--backgroundImageLarge": `url(${CurrentAnime.images.jpg.large_image_url})`,
+                                "--backgroundImageSmall": `url(${CurrentAnime.images.jpg.small_image_url})`,
                                 backgroundRepeat: "no-repeat",
                                 backgroundSize: 'cover',
                                 }}>
@@ -77,8 +82,9 @@ function ShowAnime(){
                                 drop-shadow-[0_2px_6px_rgba(0,0,0,0.8)]
                                 pt-8 pb-8">
                                     <h1 className=" w-[35%] text-2xl text-orange-300">{CurrentAnime.title_english}</h1>
-                                    <p className="text-sm w-[40%] 
-                                    overflow-hidden">{CurrentAnime.synopsis}</p>
+                                    <p className={`text-sm w-[40%] 
+                                    max-[640px]:hidden 
+                                    overflow-hidden`}>{CurrentAnime.synopsis}</p>
                                     <p className="text-yellow-500">Episodes: {CurrentAnime.episodes}</p>
                                     <p className="text-yellow-500">Duration: {CurrentAnime.duration}</p>
                                     <p className="text-yellow-500">Rank: {CurrentAnime.rank}</p>
@@ -93,6 +99,9 @@ function ShowAnime(){
 
                                 </div>
                             </div>
+                            <p className={`text-sm w-[90%] m-5 min-[640px]:hidden
+                                overflow-hidden`}>{CurrentAnime.synopsis}
+                            </p>
                             {Pictures && 
                                 (<div className="flex justify-center items-center p-8">
                                     <h1 className="text-2xl text-oliver-400">Anime Images </h1>
