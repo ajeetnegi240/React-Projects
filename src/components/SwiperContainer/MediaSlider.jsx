@@ -1,6 +1,8 @@
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination, Scrollbar,Mousewheel } from 'swiper/modules';
 import {MediaCard} from "../index"
+import {useRef,useEffect} from 'react'
+
 
 import 'swiper/css';
 import 'swiper/css/navigation';
@@ -15,11 +17,17 @@ export default function MediaSlider({
     pangination = true,
     mousewheel = true,
     cards=[],
-    heading}){
+    heading,
+    loading=false}){
+
 
     
+    
     return (
+      <>
+      {!loading&&(
       <div className=" w-9/10  sm:h-[25vw] h-[35vw] bg-transparent ">
+          
         <h1 className='text-white text-2xl m-2
         drop-shadow-[0_2px_6px_rgba(0,0,0,0.8)]'>{heading}</h1>
         <Swiper
@@ -56,6 +64,11 @@ export default function MediaSlider({
           ...
         </Swiper>
       </div>
-
+      )}
+      {loading &&(
+        <div className=" w-9/10  sm:h-[25vw] h-[35vw] bg-transparent ">Loading...</div>
+      )}
+      
+      </>
   );
 };

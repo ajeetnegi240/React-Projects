@@ -3,8 +3,8 @@ import { Search,X } from 'lucide-react';
 import { useNavigate } from "react-router-dom";
 import {ThisAnime} from "./AnimeReq"
 import { useDispatch } from "react-redux";
-import {setResults,setError} from "../store/animeslice"
-import { useEffect,useState } from 'react'
+import {setResults,setError,setLoading} from "../store/animeslice"
+import { useEffect,useState,useRef,useCallback } from 'react'
 
 
 
@@ -20,9 +20,11 @@ function SearchBtn({size=5,height="",width="",opacity=100,}) {
 
     const search = async(anime)=>{
         try{
-            setSearchClicked(false)
-
+            dispatch(setError(null))
+            dispatch(setLoading(true))
+            
             if (anime.length>0){
+                navigate('/SearchPage')
                 const result = await ThisAnime(anime)
                 
                 if ( result.data) {
@@ -36,7 +38,7 @@ function SearchBtn({size=5,height="",width="",opacity=100,}) {
                     dispatch(setError('Something Went Wrong'))
                     dispatch(setResults([]))
                 }
-                navigate('/SearchPage')
+                dispatch(setLoading(false))
                 return
             }
         }catch(error){
@@ -44,6 +46,16 @@ function SearchBtn({size=5,height="",width="",opacity=100,}) {
         }
     }
 
+    const timer=useRef(null)
+    const debounceSearch = (anime,time=500)=>{
+        console.log(anime)
+        if (timer.current){
+            clearTimeout(timer.current);
+        }
+        timer.current = setTimeout(()=>{
+            search(anime)
+        },time)
+    }
 
     const CrossIcon = () => {
         return (
@@ -80,7 +92,7 @@ function SearchBtn({size=5,height="",width="",opacity=100,}) {
             {searchClicked && (
                 <div className={`flex justify-center items-center w-full h-full  fixed top-0 right-0 z-[9999] bg-slate-950/60`} >
                     <div className="flex ">
-                        <form onSubmit={(e)=>{e.preventDefault();search(query)}} className="flex">
+                        <form onSubmit={(e)=>{e.preventDefault();setSearchClicked(false);debounceSearch(query)}} className="flex">
                             <div className="flex gap-4 bg-transparent bg-black border-2 border-gray-400 rounded-2xl py-1 px-1">  
                                 {SearchIcon()}             
                                 <input type="search" 
@@ -88,7 +100,8 @@ function SearchBtn({size=5,height="",width="",opacity=100,}) {
                                 size='20'
                                 className="bg-transparent focus:outline-hidden 
                                 text-white transition ease-out duration-200 hover:scale-110"
-                                onChange={(e)=>setQuery(e.target.value)}
+                                onChange={(e)=>{const value=e.target.value;setQuery(e.target.value);
+                                    debounceSearch(value)}}
                                 />
                                 <button
                                     type="button"

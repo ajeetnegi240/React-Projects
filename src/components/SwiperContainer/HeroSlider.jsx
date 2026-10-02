@@ -3,6 +3,8 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination, Scrollbar,Mousewheel } from 'swiper/modules';
 import {HeroCard} from "../index"
 
+
+
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
@@ -16,12 +18,15 @@ export default function HeroSlider(
     pangination = true,
     mousewheel = true,
     cards=[],
-    heading}){
-
-
-
+    heading,
+    loading=false}){
+    
+    
     return (
-        <div className=" justify-center bg-transparent w-9/10 h-[55vw] sm:h-[45vw] ">
+        <>
+        {!loading &&(
+        <div className=" justify-center bg-transparent w-9/10 h-[55vw] sm:h-[45vw] "
+>
             <div className="flex bg-transparent justify-center">
                 <h1 className='text-white m-2
                 drop-shadow-[0_2px_6px_rgba(0,0,0,0.8)]
@@ -50,7 +55,11 @@ export default function HeroSlider(
                 </SwiperSlide>)}
                 ...
             </Swiper>
-        </div>
+        </div>)}
+        {loading&&(
+        <div className=" justify-center bg-transparent w-9/10 h-[55vw] sm:h-[45vw] ">Loading...</div>
+        )}
+        </>
 
     );
 };
