@@ -35,10 +35,10 @@ export default function SearchResult(){
                     <div className="flex bg-slate-600 w-[100vw]  justify-center pt-30 pb-10 items-center">
                         <h1 className="text-3xl text-oliver-400">Search Results... </h1>
                     </div>
-                    <div className="flex justify-center items-center p-4">
-                        <div className="grid min-[600px]:grid-cols-4 min-[500px]:grid-cols-3 min-[400px]:grid-cols-2  gap-3">
+                    <div className="flex justify-center  items-center p-4">
+                        <div className="w-full grid min-[600px]:grid-cols-4 min-[500px]:grid-cols-3 min-[400px]:grid-cols-2  gap-3">
                             {results.map((anime)=>
-                            <div key={anime.mal_id} className="  bg-transparent aspect-9/16 
+                            <div key={anime.node.id} className="  bg-transparent aspect-9/16 
                             max-[400px]:aspect-9/14">
                                 <MediaCard  anime={anime}/>
                             </div>

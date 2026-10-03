@@ -20,6 +20,10 @@ function SearchBtn({size=5,height="",width="",opacity=100,}) {
 
     const search = async(anime)=>{
         try{
+            console.log(anime)
+            if (anime.length==0){
+                navigate("/")
+            }
             dispatch(setError(null))
             dispatch(setLoading(true))
             
@@ -47,7 +51,7 @@ function SearchBtn({size=5,height="",width="",opacity=100,}) {
     }
 
     const timer=useRef(null)
-    const debounceSearch = (anime,time=500)=>{
+    const debounceSearch = (anime,time=1000)=>{
         console.log(anime)
         if (timer.current){
             clearTimeout(timer.current);

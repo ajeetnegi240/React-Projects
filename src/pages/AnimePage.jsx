@@ -16,38 +16,41 @@ function ShowAnime(){
         const GetData =async()=>{
             try{
                     const result = await AnimeDetail(id)
-                    setCurrentAnime(result.data)
-
-                    await delay(1500)
-
-                    const pic =`${id}/pictures`
-                    const pics = await AnimeDetail(pic)
-                    setPictures(pics.data)
-
-                    await delay(1500)
+                    setCurrentAnime(result)
                     
-                    const char =`${id}/characters`
-                    const chars = await AnimeDetail(char)
-                    setCharacters(chars.data)
+                    // await delay(1500)
 
-                    await delay(1500)
+                    // const pic =`${id}/pictures`
+                    // const pics = await AnimeDetail(pic)
+                    // setPictures(pics.data)
 
+                    // await delay(1500)
+                    
+                    // const char =`${id}/characters`
+                    // const chars = await AnimeDetail(char)
+                    // setCharacters(chars.data)
+
+                    // await delay(1500)
+                setCharacters(result?.characters)
+                setPictures(result?.pictures)
 
             }catch (error){
                     console.log(error)
             }}
         GetData();
+        
+    
             
     },[id])
-    const gototrailer = ()=>{
-        console.log(CurrentAnime)
-        if (CurrentAnime.trailer.url){
-            window.open(CurrentAnime.trailer.url,"_blank","noopener,noreferrer");
+    // const gototrailer = ()=>{
+    //     console.log(CurrentAnime)
+    //     if (CurrentAnime.trailer.url){
+    //         window.open(CurrentAnime.trailer.url,"_blank","noopener,noreferrer");
             
-        }else{
-            alert("No trailer available!")
-        }
-    }
+    //     }else{
+    //         alert("No trailer available!")
+    //     }
+    // }
 
     return(
         <>
@@ -62,6 +65,7 @@ function ShowAnime(){
                     <h1 className="text-3xl text-oliver-400">Anime Detail </h1>
                     </div>
                 <div className="flex justify-center items-center p-4 ">
+            
                     {CurrentAnime && 
                         (<div> 
                             <div  className={`flex items-end w-[100%] h-[100%] 
@@ -70,8 +74,8 @@ function ShowAnime(){
                                             min[640px]:bg-no-repeat min-[640px]:cover
                                             rounded-sm  `}
                                 style={{
-                                "--backgroundImageLarge": `url(${CurrentAnime.images.jpg.large_image_url})`,
-                                "--backgroundImageSmall": `url(${CurrentAnime.images.jpg.small_image_url})`,
+                                "--backgroundImageLarge": `url(${CurrentAnime.main_picture.large})`,
+                                "--backgroundImageSmall": `url(${CurrentAnime.main_picture.large})`,
                                 backgroundRepeat: "no-repeat",
                                 backgroundSize: 'cover',
                                 }}>
@@ -81,20 +85,20 @@ function ShowAnime(){
                                 bg-gradient-to-r from-slate-950 via-slate-600/40 to-transparent
                                 drop-shadow-[0_2px_6px_rgba(0,0,0,0.8)]
                                 pt-8 pb-8">
-                                    <h1 className=" w-[35%] text-2xl text-orange-300">{CurrentAnime.title_english}</h1>
+                                    <h1 className=" w-[35%] text-2xl text-orange-300">{CurrentAnime.title}</h1>
                                     <p className={`text-sm w-[40%] 
                                     max-[640px]:hidden 
                                     overflow-hidden`}>{CurrentAnime.synopsis}</p>
-                                    <p className="text-yellow-500">Episodes: {CurrentAnime.episodes}</p>
-                                    <p className="text-yellow-500">Duration: {CurrentAnime.duration}</p>
+                                    <p className="text-yellow-500">Episodes: {CurrentAnime.num_episodes}</p>
+                                    <p className="text-yellow-500">Duration: {CurrentAnime.average_episode_duration}</p>
                                     <p className="text-yellow-500">Rank: {CurrentAnime.rank}</p>
                                     <p className="text-yellow-500">Popularity: {CurrentAnime.popularity}</p>
                                     <div className=" flex gap-4 my-4 ">
-                                        <p className="text-yellow-500">Rating: {CurrentAnime.score}</p>
-                                        <button className="bg-transparent  border-2 border-orange rounded-lg px-1 hover:bg-orange-500" onClick={gototrailer}
+                                        <p className="text-yellow-500">Rating: {CurrentAnime.mean}</p>
+                                        {/* <button className="bg-transparent  border-2 border-orange rounded-lg px-1 hover:bg-orange-500" onClick={gototrailer}
                                         >
                                             Trailer
-                                        </button>
+                                        </button> */}
                                     </div>
 
                                 </div>
@@ -103,12 +107,12 @@ function ShowAnime(){
                                 overflow-hidden`}>{CurrentAnime.synopsis}
                             </p>
                             {Pictures && 
-                                (<div className="flex justify-center items-center p-8">
+                                (<div className=" justify-center items-center p-8">
                                     <h1 className="text-2xl text-oliver-400">Anime Images </h1>
-                                    <div className="grid grid-cols-4 gap-3">
+                                    <div className="grid sm:grid-cols-4 grid-cols-2 gap-3">
                                         {Pictures.map((imgUrl,index)=>
                                             <div key={index} className="  bg-transparent aspect-square">
-                                                <img src={imgUrl} alt="" 
+                                                <img src={imgUrl.medium} alt="" 
                                                 className=" w-[100%] h-[100%]"/>
                                             </div>)}
                                     </div>
@@ -121,7 +125,7 @@ function ShowAnime(){
                                         {Characters.map((item,index)=>
                                             <div key={index} className={`flex items-end w-[100%] h-[100%] aspect-9/16 rounded-sm `}
                                                 style={{
-                                                backgroundImage: `url(${item.character.images.jpg.image_url})`,
+                                                backgroundImage: `url(${item.node.images.jpg.image_url})`,
                                                 backgroundRepeat: "no-repeat",
                                                 backgroundSize: 'cover',
                                                 }}>
@@ -130,7 +134,7 @@ function ShowAnime(){
                                                 g-gradient-to-b from-slate-950/60 to-slate-950/90 
                                                 bg-gradient-to-r from-slate-950 via-slate-600/40 to-transparent
                                                 drop-shadow-[0_2px_6px_rgba(0,0,0,0.8)]">
-                                                    <h1 className=" w-[80%] line-clamp-4 text-sm text-orange-100">{item.character.name}</h1>
+                                                    <h1 className=" w-[80%] line-clamp-4 text-sm text-orange-100">{item.node.name}</h1>
                                                     <div className=" flex gap-4 my-4 ">
                                                         <p className="text-yellow-500 text-sm">{item.role}</p>
                                                     </div>

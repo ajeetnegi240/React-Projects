@@ -9,12 +9,7 @@ export default function Home(){
     const [TopAnimes, setTopAnimes] = useState([]);
     const [TopPopularAnime, setTopPopularAnime] = useState([]);
     const [TopUpcomingAnime, setTopUpcomingAnime] = useState([]);
-    const loading={
-        "loadingTopAiring":true,
-        "loadingTopAnime":true,
-        "loadingPopularAnime":true,
-        "loadingUpcomingAnime":true,
-    }
+
 
 
     useEffect(()=>{
@@ -52,7 +47,7 @@ export default function Home(){
 
 
     },[])
-
+    
 
 
     return(
