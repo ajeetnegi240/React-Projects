@@ -17,21 +17,21 @@ export default function SearchResult(){
                     <link rel="canonical" href="/SearchPage" />
             </Helmet>
             {error && (
-                <div className=" flex w-[100vw]  h-[100vh]  justify-center ">
-                    <div className="flex bg-slate-600 w-[100vw] h-[40vw] justify-center py-80 items-center">
+                <div className=" flex w-[100vw]  min-h-screen bg-slate-600 justify-center ">
+                    <div className="flex bg-slate-600 w-[100vw] h-[40vw] justify-center py-60 items-center">
                         <h1 className="text-3xl text-oliver-400">{error} </h1>
                     </div>
                 </div>
             )}
             {loading && (
-                <div className=" flex w-[100vw]  h-[100vh]  justify-center ">
-                    <div className="flex bg-slate-600 w-[100vw] h-[40vw] justify-center py-80 items-center">
+                <div className=" flex w-[100vw]  min-h-screen bg-slate-600 justify-center ">
+                    <div className="flex bg-slate-600 w-[100vw] h-[40vw] justify-center py-60 items-center">
                         <h1 className="text-3xl text-oliver-400">Loading... </h1>
                     </div>
                 </div>
             )}
             {results.length>0 &&(
-                <div className="  w-[100vw]  h-full    justify-center ">
+                <div className="  w-[100vw]  min-h-screen    bg-slate-600 justify-center ">
                     <div className="flex bg-slate-600 w-[100vw]  justify-center pt-30 pb-10 items-center">
                         <h1 className="text-3xl text-oliver-400">Search Results... </h1>
                     </div>
@@ -47,9 +47,9 @@ export default function SearchResult(){
                     </div>
                 </div>
             )}
-            { (error ==null)&& results.length ==0 &&(
-                <div className=" flex w-[100vw]  h-[100vh] justify-center ">
-                    <div className="flex bg-transparent w-[100vw] h-[40vw] justify-center py-80 items-center">
+            { (error ==null)&& !loading&&results.length ==0 &&(
+                <div className=" flex w-[100vw]  min-h-screen bg-slate-600 justify-center ">
+                    <div className="flex bg-transparent w-[100vw] h-[40vw] justify-center py-60 items-center">
                         <h1 className="text-3xl text-oliver-400">No Anime Found </h1>
                     </div>
                     

@@ -17,26 +17,26 @@ export default function Home(){
         const loadAnime = async () => {
             try {
             const airing = await TopAnime("airing", 10);
-            setTopAiringAnime(airing.data);
+            airing?setTopAiringAnime(airing.data):null;
 
 
 
             await delay(1500);
 
             const top = await TopAnime(undefined, 10);
-            setTopAnimes(top.data);
+            top?setTopAnimes(top.data):null;
 
             await delay(1500);
             
 
             const popular = await TopAnime("bypopularity", 10);
-            setTopPopularAnime(popular.data);
+            popular?setTopPopularAnime(popular.data):null;
 
             await delay(1500);
 
 
             const upcoming = await TopAnime("upcoming", 10);
-            setTopUpcomingAnime(upcoming.data);
+            upcoming?setTopUpcomingAnime(upcoming.data):null;
 
 
             } catch (error) {

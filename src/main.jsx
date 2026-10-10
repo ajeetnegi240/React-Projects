@@ -7,6 +7,7 @@ import { Provider } from 'react-redux'
 import store from './store/store.js'
 import { RouterProvider, createBrowserRouter } from 'react-router-dom'
 import Home from "./pages/Home"
+import AnimeGenre from "./pages/AnimeGenrePage.jsx"
 import SearchResult from "./pages/SearchPage.jsx"
 import ShowAnime from "./pages/AnimePage.jsx"
 import ErrorBoundary from "./ErrorBoundary"
@@ -25,6 +26,10 @@ const router = createBrowserRouter([
         {
             path: "/SearchPage",
             element: <SearchResult />,
+        },
+        {
+            path: "/AnimeGenre",
+            element: <AnimeGenre />,
         },
         {
             path:"/anime/:id",

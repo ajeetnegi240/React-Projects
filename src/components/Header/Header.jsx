@@ -11,11 +11,11 @@ function Header(){
         path:'/',
         active:true,
     },
-    // {
-    //     name:"Anime",
-    //     path:"/Anime",
-    //     active:"false",
-    // },
+    {
+        name:"Anime",
+        path:"/AnimeGenre",
+        active:"false",
+    },
     // {
     //     name:"Watch Available",
     //     path:"/WatchAvailable",
