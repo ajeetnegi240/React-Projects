@@ -131,7 +131,7 @@ export default function AnimeGenre(){
     return(
         <div>
         <div className="  w-[100vw]  min-h-screen    bg-slate-600 justify-center ">
-            <div className="flex   sm:w-8/10 w-full gap-3 pt-21 bg-slate-900
+            <div className="flex    w-full gap-3 pt-21 bg-slate-900
               px-2 py-5">
                 <ul className="flex sm:gap-2 gap-1">
                     {filterItems.map((item)=>
