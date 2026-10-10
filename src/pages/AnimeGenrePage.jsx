@@ -92,38 +92,45 @@ export default function AnimeGenre(){
 
 
     useEffect(()=>{
-        
-        setResult([])
-        {results?.map((anime)=>{
-            setLoading(true)
-            const eachAnime=async()=>{
-                try{
-                    console.log(selectedGenre)
-                    const data = await AnimeDetail(anime.node.id)
-                    if (data?.start_season.year==selectedYear ){
-                            if (selectedGenre == "Genre"){
-                                result.push(data)
-                                setResult(result)
-                                console.log("selectedGenre is genre")
-                            }else{
-                                {data.genres.map((genre)=>{
-                                    if (genre.name==selectedGenre){
-                                        result.push(data)}
-                                        setResult(result)
-                                    }
-                                )}
-                                
-                            }
-                            }
-                }catch(error){
-                    console.log(error)
-                }finally{
-                    setLoading(false)
+        const filterAnime =()=>{
+            
+            const newResult =[]
+            setResult(newResult)
+            console.log("emptu ",result)
+            {results?.map((anime)=>{ 
+                setLoading(true)
+                const eachAnime=async()=>{
+                    try{
+                        
+                        console.log(selectedGenre)
+                        const data = await AnimeDetail(anime.node.id)
+                        if (data?.start_season.year==selectedYear ){
+                                if (selectedGenre == "Genre"){
+                                    newResult.push(data)
+                                    setResult(newResult)
+                                    console.log("selectedGenre is genre",data)
+                                }else{
+                                    {data.genres.map((genre)=>{
+                                        if (genre.name==selectedGenre){
+                                            newResult.push(data)}
+                                            setResult(newResult)
+                                        }
+                                    )}
+                                    
+                                }
+                                }
+                    }catch(error){
+                        console.log(error)
+                    }finally{
+                        setLoading(false)
+                    }
                 }
-            }
-            eachAnime()
-            console.log(result)
-        })}
+                eachAnime()
+                console.log(result)
+            })}
+        }
+        filterAnime()
+        
         
         
     },[selectedGenre,selectedYear,selectedSeason,results])
@@ -141,7 +148,7 @@ export default function AnimeGenre(){
                 </ul>
             </div>
 
-            {result?.length>0 &&(
+            {!loading&&result?.length>0 &&(
                             <div className="  w-[100vw]  min-h-screen    bg-slate-600 justify-center ">
                                 <div className="flex justify-center  items-center p-4">
                                     <div className="w-full grid min-[600px]:grid-cols-4 min-[500px]:grid-cols-3 min-[400px]:grid-cols-2  gap-3">
